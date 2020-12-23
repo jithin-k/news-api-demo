@@ -16,6 +16,7 @@
 		3E95EDD725937D7F0010ABE4 /* NewsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E95EDD625937D7F0010ABE4 /* NewsAPIResponse.swift */; };
 		3E95EDDF259381E40010ABE4 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E95EDDE259381E40010ABE4 /* NewsViewModel.swift */; };
 		3E95EDE3259384340010ABE4 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E95EDE2259384340010ABE4 /* NewsViewController.swift */; };
+		3E95EDE625938CFE0010ABE4 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E95EDE525938CFE0010ABE4 /* NewsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3E95EDD625937D7F0010ABE4 /* NewsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPIResponse.swift; sourceTree = "<group>"; };
 		3E95EDDE259381E40010ABE4 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		3E95EDE2259384340010ABE4 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		3E95EDE525938CFE0010ABE4 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				3E95EDDE259381E40010ABE4 /* NewsViewModel.swift */,
 				3E95EDE2259384340010ABE4 /* NewsViewController.swift */,
+				3E95EDE525938CFE0010ABE4 /* NewsCell.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				3E95EDD3259379000010ABE4 /* ArticleServices.swift in Sources */,
 				3E95EDDF259381E40010ABE4 /* NewsViewModel.swift in Sources */,
 				3E95EDBB2593775F0010ABE4 /* AppDelegate.swift in Sources */,
+				3E95EDE625938CFE0010ABE4 /* NewsCell.swift in Sources */,
 				3E95EDE3259384340010ABE4 /* NewsViewController.swift in Sources */,
 				3E95EDD725937D7F0010ABE4 /* NewsAPIResponse.swift in Sources */,
 				3E95EDBD2593775F0010ABE4 /* SceneDelegate.swift in Sources */,
