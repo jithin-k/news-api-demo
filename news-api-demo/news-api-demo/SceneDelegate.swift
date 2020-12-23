@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  news-api-demo
 //
-//  Created by WIFI on 23/12/20.
+//  Created by Jithin on 23/12/20.
 //
 
 import UIKit
