@@ -18,7 +18,18 @@ class NewsViewController: UITableViewController {
         viewModel.delegate = self
         viewModel.fetchArticles()
     }
-
+    
+    @IBAction func refreshNews(_ sender: UIRefreshControl) {
+        viewModel.fetchArticles()
+    }
+    
+    private func showError(_ error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -30,15 +41,20 @@ class NewsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == viewModel.lastArticleIndex {
+        if viewModel.isNextPageAvailable && indexPath.row == viewModel.lastArticleIndex {
             viewModel.fetchArticles(paginate: true)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLoadingCell", for: indexPath)
+            return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
         let article = viewModel.article(atIndex: indexPath)
-        cell.titleLabel.text = article.title
-        cell.authorLabel.text = article.author
-        cell.descriptionLabel.text = article.description
+        cell.titleLabel.text = article.title ?? "N/A"
+        cell.authorLabel.text = article.author ?? "N/A"
+        cell.descriptionLabel.text = article.description ?? "N/A"
+        if let url = article.urlToImage {
+            cell.newsImageView.setImage(url: url)
+        }
         return cell
     }
 
@@ -47,11 +63,13 @@ class NewsViewController: UITableViewController {
 extension NewsViewController: NewsViewModelDelegate {
     
     func viewModelDidFetchArticles(_ viewModel: NewsViewModel) {
+        refreshControl?.endRefreshing()
         tableView.reloadData()
     }
     
     func viewmodel(_ viewModel: NewsViewModel, failedToFetchArticles error: Error) {
-        print("failed to fetch news: ", error.localizedDescription)
+        refreshControl?.endRefreshing()
+        showError(error)
     }
     
 }

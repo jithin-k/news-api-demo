@@ -30,9 +30,6 @@ class NewsViewModel {
     }
     
     func article(atIndex index: IndexPath) -> Article {
-        guard articles.count > index.row else {
-            fatalError("articles count error")
-        }
         return articles[index.row]
     }
     
@@ -71,6 +68,7 @@ class NewsViewModel {
                     self.page += 1
                 }
                 DispatchQueue.main.async {
+                    print(self.articles.count)
                     self.delegate?.viewModelDidFetchArticles(self)
                 }
                 
