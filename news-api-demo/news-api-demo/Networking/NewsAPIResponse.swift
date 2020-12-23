@@ -9,8 +9,9 @@ import Foundation
 
 struct NewsAPIResponse: Decodable {
     let status: String
-    let totalResults: Int
-    let articles: [Article]
+    var totalResults: Int? = 0
+    let message: String?
+    var articles: [Article]? = []
 }
 
 struct Article: Decodable {

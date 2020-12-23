@@ -29,6 +29,10 @@ class ArticleService {
             }
             do {
                 let response = try self.decoder.decode(NewsAPIResponse.self, from: data)
+                if response.status == "error", let message = response.message {
+                    completion(.failure(ArticleError.unknownError(message: message)))
+                    return
+                }
                 completion(.success(response))
             } catch {
                 completion(.failure(error))
@@ -66,6 +70,17 @@ extension EndPoint {
     }
 }
 
-enum ArticleError: Error {
+enum ArticleError: Error, LocalizedError {
     case noData
+    case unknownError(message: String)
+    
+    var errorDescription: String? {
+        switch self {
+        case .noData:
+            return "No data"
+        
+        case .unknownError(let message):
+            return message
+        }
+    }
 }

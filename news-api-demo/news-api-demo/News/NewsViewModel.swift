@@ -57,12 +57,12 @@ class NewsViewModel {
             switch response {
             case .success(let news):
                 let articles = news.articles
-                self.totalCount = news.totalResults
+                self.totalCount = news.totalResults ?? 0
                 
                 if self.page == 1 {
-                    self.articles = articles
+                    self.articles = articles ?? []
                 } else {
-                    self.articles.append(contentsOf: articles)
+                    self.articles.append(contentsOf: articles ?? [])
                 }
                 if self.isNextPageAvailable {
                     self.page += 1
