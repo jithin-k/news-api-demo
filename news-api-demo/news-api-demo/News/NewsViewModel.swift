@@ -21,21 +21,11 @@ class NewsViewModel {
     weak var delegate: NewsViewModelDelegate?
     var totalCount: Int = 0
     
-    var lastArticleIndex: Int {
-        return articles.count-1
-    }
-    
     var isNextPageAvailable: Bool {
         return articles.count < totalCount
     }
     
-    func article(atIndex index: IndexPath) -> Article {
-        return articles[index.row]
-    }
-    
     func fetchArticles(paginate: Bool = false) {
-        
-        print("page: ", page, articles.count, "total: ", totalCount)
         guard !fetchingInProgress else { return }
         
         if !paginate {
@@ -43,16 +33,11 @@ class NewsViewModel {
         } else if !isNextPageAvailable {
             return
         }
-        
         fetchingInProgress = true
         
         service.fetchArticles(page: page) {[weak self] (response) in
-            
             guard let self = self else { return }
-            
-            defer {
-                self.fetchingInProgress = false
-            }
+            defer { self.fetchingInProgress = false }
             
             switch response {
             case .success(let news):

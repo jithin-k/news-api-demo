@@ -54,7 +54,7 @@ extension EndPoint {
         return EndPoint(path: "/v2/top-headlines", queryItems: [
             URLQueryItem(name: "country", value: "us"),
             URLQueryItem(name: "category", value: "business"),
-            URLQueryItem(name: "apiKey", value: "a8fabd9ff4234c82aad08eaaa4ea17a0"),
+            URLQueryItem(name: "apiKey", value: "24de9e0fb15e411dadada31e15d45447"),
             URLQueryItem(name: "pageSize", value: "5"),
             URLQueryItem(name: "page", value: "\(page)")
         ])

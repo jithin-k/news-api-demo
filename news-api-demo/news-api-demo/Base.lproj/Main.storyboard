@@ -136,6 +136,7 @@
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="xQa-kf-x3W">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
                         <connections>
                             <action selector="refreshNews:" destination="YxE-tu-QGa" eventType="valueChanged" id="5Tg-KV-4tm"/>
                         </connections>

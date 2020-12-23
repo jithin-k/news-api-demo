@@ -36,19 +36,22 @@ class NewsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if viewModel.isNextPageAvailable {
+            return viewModel.articles.count + 1
+        }
         return viewModel.articles.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if viewModel.isNextPageAvailable && indexPath.row == viewModel.lastArticleIndex {
+        if indexPath.row == viewModel.articles.count {
             viewModel.fetchArticles(paginate: true)
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLoadingCell", for: indexPath)
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
-        let article = viewModel.article(atIndex: indexPath)
+        let article = viewModel.articles[indexPath.row]
         cell.titleLabel.text = article.title ?? "N/A"
         cell.authorLabel.text = article.author ?? "N/A"
         cell.descriptionLabel.text = article.description ?? "N/A"
