@@ -12,12 +12,13 @@ typealias ArticlesResponse = Result<NewsAPIResponse, Error>
 class ArticleService {
     
     private let decoder = JSONDecoder()
+    var session = URLSession.shared
     
     func fetchArticles(page: Int, completion: @escaping (ArticlesResponse) -> Void) {
         
         guard let articlesURL = EndPoint.articles(page: page).url else { return }
         
-        let task = URLSession.shared.dataTask(with: articlesURL) {[weak self] (data, response, error) in
+        let task = session.dataTask(with: articlesURL) {[weak self] (data, _, error) in
             guard let self = self else { return }
             if let error = error {
                 completion(.failure(error))
@@ -29,8 +30,8 @@ class ArticleService {
             }
             do {
                 let response = try self.decoder.decode(NewsAPIResponse.self, from: data)
-                if response.status == "error", let message = response.message {
-                    completion(.failure(ArticleError.unknownError(message: message)))
+                if let error = response.error {
+                    completion(.failure(error))
                     return
                 }
                 completion(.success(response))
@@ -67,20 +68,5 @@ extension EndPoint {
         components.path = path
         components.queryItems = queryItems
         return components.url
-    }
-}
-
-enum ArticleError: Error, LocalizedError {
-    case noData
-    case unknownError(message: String)
-    
-    var errorDescription: String? {
-        switch self {
-        case .noData:
-            return "No data"
-        
-        case .unknownError(let message):
-            return message
-        }
     }
 }
